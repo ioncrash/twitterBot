@@ -15,10 +15,10 @@ const statusUpdate = function(text) {
   });
 };
 
-Twitter.stream('statuses/filter', {track: '#honkeyTonkFlounder'}, function(stream) {
+Twitter.stream('statuses/filter', {follow: '24913944'}, function(stream) {
   stream.on('data', function(tweet) {
     let username = "@" + tweet.user.screen_name;
-    statusUpdate("and he's feelin' goooooood " + username);
+    statusUpdate("@ioncrash oh yeah???");
     // console.log("and he's feelin' goooooood " + username);
   });
 
