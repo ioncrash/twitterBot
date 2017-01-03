@@ -3,10 +3,20 @@ const secret = require('./secret.js');
 
 var Twitter = new TwitterPackage(secret);
 
-Twitter.post('statuses/update', {status: "I'm testing a thing!"},  function(error, tweet, response){
-  if(error){
+// Twitter.post('statuses/update', {status: "I'm testing a thing!"},  function(error, tweet, response){
+//   if(error){
+//     console.log(error);
+//   }
+//   console.log(tweet);  // Tweet body.
+//   console.log(response);  // Raw response object.
+// });
+
+Twitter.stream('statuses/filter', {track: '#honkeyTonkFlounder'}, function(stream) {
+  stream.on('data', function(tweet) {
+    console.log(tweet.text);
+  });
+
+  stream.on('error', function(error) {
     console.log(error);
-  }
-  console.log(tweet);  // Tweet body.
-  console.log(response);  // Raw response object.
+  });
 });
