@@ -30,6 +30,7 @@ Other good uses for bots:
 
 https://twitter.com/dearassistant?lang=en
 https://twitter.com/whatthefare
+http://www.hongkiat.com/blog/using-twitter-bots/
 
 
 Twitter rules and best practices:

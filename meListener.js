@@ -14,11 +14,11 @@ const statusUpdate = function(text) {
     console.log(response);  // Raw response object.
   });
 };
-
-Twitter.stream('statuses/filter', {follow: '24913944'}, function(stream) {
+// {follow: '24913944'}
+Twitter.stream('statuses/filter', {track: '#honkeyTonkFlounder'}, function(stream) {
   stream.on('data', function(tweet) {
     let username = "@" + tweet.user.screen_name;
-    statusUpdate("@ioncrash oh yeah???");
+    statusUpdate("@pygartheangel and he's feelin goooood");
     // console.log("and he's feelin' goooooood " + username);
   });
 
