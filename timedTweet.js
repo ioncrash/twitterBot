@@ -15,7 +15,7 @@ const statusUpdate = function(text) {
   });
 };
 
-let keyWord = 'cat';
+let keyWord = 'cute';
 
 // listen for anyone tweeting at the bot
 Twitter.stream('statuses/filter', {track: '@catFriendFinder'}, function(stream) {
@@ -33,8 +33,9 @@ Twitter.stream('statuses/filter', {track: '@catFriendFinder'}, function(stream) 
 
 const retweet = function() {
     let params = {
-        q: keyWord,  // REQUIRED
-        result_type: 'recent',
+      // "term1 term2" is an AND search, filter:media returns only image and video tweets
+        q: "cat " + keyWord + " filter:media",  // REQUIRED
+        result_type: 'mixed',
         lang: 'en'
     }
     // for more parametes, see: https://dev.twitter.com/rest/reference/get/search/tweets
@@ -43,7 +44,14 @@ const retweet = function() {
       // if there no errors
         if (!err) {
           // grab ID of tweet to retweet
-            let retweetId = data.statuses[0].id_str;
+            let statuses = data.statuses;
+            let target = data.statuses.find((e) => {
+              return e.text.includes('cat');
+            });
+            let retweetId = '';
+            if (target) {
+              retweetId = target.id_str;
+            }
             // Tell TWITTER to retweet
             Twitter.post('statuses/retweet/' + retweetId, {
                 id: retweetId
@@ -66,4 +74,4 @@ const retweet = function() {
 
 retweet();
 // retweet in every 50 minutes
-// setInterval(retweet, 60000);
+setInterval(retweet, 300000);
